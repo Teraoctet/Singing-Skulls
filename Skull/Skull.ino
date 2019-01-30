@@ -27,7 +27,7 @@ const char* ssid = "LeNet";
 const char* password = "connectemoi";
 const unsigned int outPort = 12345;
 const unsigned int oscPort = 54321;
-const unsigned int dataPort = 255255;
+const unsigned int dataPort = 25500;
 const unsigned int tcpPort = 55555;
 WiFiUDP UdpOSC;
 WiFiUDP UdpData;
@@ -125,8 +125,8 @@ void WiFiEvent(WiFiEvent_t event) {
             Serial.println(WiFi.localIP());
 
             // open ports
-            UdpOSC.begin(oscPort);
             UdpData.begin(dataPort);
+            UdpOSC.begin(oscPort);
   
             // send handshake message
             UdpOSC.beginPacket(outIp, outPort);
@@ -193,17 +193,21 @@ void loop(void)
   }
 
   // Read raw data
-  int packetSize = UdpData.parsePacket();
-  if (packetSize)
+  int packetSize;// = UdpData.parsePacket();
+  //if (packetSize)
+  if ( (packetSize = UdpData.parsePacket()) > 0)
   {
-  char incomingPacket[255];
-    Serial.printf("Received %d bytes from %s, port %d\n", packetSize, UdpData.remoteIP().toString().c_str(), UdpData.remotePort());
-    int len = UdpData.read(incomingPacket, 255);
-    if (len > 0)
+    char incomingPacket[255];
+    //Serial.printf("Received %d bytes from %s, port %d\n", packetSize, UdpData.remoteIP().toString().c_str(), UdpData.remotePort());
+    //Serial.printf("UDP packet contents: %s\n", incomingPacket);
+    if (UdpData.read(incomingPacket, 255) > 0)
     {
-      incomingPacket[len] = 0;
+      int value = atoi(incomingPacket);
+      // TODO: prendre en compte les moteurs de Jack ?
+      OSCMessage servomsg("/servo");
+      servomsg.add(value);
+      set_servo(servomsg, 0);
     }
-    Serial.printf("UDP packet contents: %s\n", incomingPacket);
       
   }
 
