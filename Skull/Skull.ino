@@ -270,17 +270,20 @@ void set_servo(OSCMessage &msg, int addrOffset)
   #else
   int index = -1;
   if (msg.match("/0", addrOffset)) index = 0;
-  if (msg.match("/1", addrOffset)) index = 1;
-  if (msg.match("/2", addrOffset)) index = 2;
-  if (msg.match("/3", addrOffset)) index = 3;
-  if (msg.match("/4", addrOffset)) index = 4;
-  if (msg.match("/5", addrOffset)) index = 5;
-  if (msg.match("/6", addrOffset)) index = 6;
+  else if (msg.match("/1", addrOffset)) index = 1;
+  else if (msg.match("/2", addrOffset)) index = 2;
+  //if (msg.match("/3", addrOffset)) index = 3;
+  else if (msg.match("/4", addrOffset)) index = 4;
+  else if (msg.match("/5", addrOffset)) index = 5;
+  else if (msg.match("/6", addrOffset)) index = 6;
+  else index = 3;
   
-  if (index >= 0 && msg.isInt(0))
+  if (msg.isInt(0))
   {
     int servoValue = constrain(SERVO_INIT_VALUE + msg.getInt(0), 0, 180);
     pwm.setPWM(index, 0, map(servoValue, 0, 180, SERVOMIN, SERVOMAX));
+    Serial.print(index);
+    Serial.print(" - ");
     Serial.println(servoValue);
   }
   else send_simple_message("/error");
