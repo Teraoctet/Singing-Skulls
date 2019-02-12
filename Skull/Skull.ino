@@ -12,12 +12,12 @@
 // ID and NAME //
 /////////////////
 #ifndef SOLIST
-const int SKULL_ID = 1; // SET SKULL ID HERE: 1 to 7
+const int SKULL_ID = 4; // SET SKULL ID HERE: 1 to 7
 #else
 const int SKULL_ID = 0; // do not change
 #endif
 
-String SKULL_NAMES[8] = { "Jack", "Sissi", "Ninon", "Hubert", "Jerry", "Nancy", "Franck", "Pat"};
+String SKULL_NAMES[6] = { "Jack", "Pat", "Ninon", "Sissi", "Jerry", "Hubert"};
 const String SKULL_NAME = SKULL_NAMES[SKULL_ID];
 
 //////////
