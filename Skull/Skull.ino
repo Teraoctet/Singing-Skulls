@@ -6,7 +6,7 @@
 #include "WifiUDP.h"
 #include <EEPROM.h>
 
-//#define SOLIST // COMMENT FOR NON SOLISTS
+#define SOLIST // COMMENT FOR NON SOLISTS
 
 /////////////////
 // ID and NAME //
@@ -17,7 +17,7 @@ const int SKULL_ID = 1; // SET SKULL ID HERE: 1 to 7
 const int SKULL_ID = 0; // do not change
 #endif
 
-String SKULL_NAMES[8] = { "Jack", "Sissi", "Ninon", "Hubert", "Jerry", "Nancy", "Franck", "Pat"};
+String SKULL_NAMES[6] = { "Jack", "Pat", "Ninon", "Sissi", "Jerry", "Hubert"};
 const String SKULL_NAME = SKULL_NAMES[SKULL_ID];
 
 //////////
@@ -27,7 +27,7 @@ const char* ssid = "LeNet";
 const char* password = "connectemoi";
 const unsigned int outPort = 12345;
 const unsigned int oscPort = 54321;
-const unsigned int dataPort = 255255;
+const unsigned int dataPort = 25500;
 const unsigned int tcpPort = 55555;
 WiFiUDP UdpOSC;
 WiFiUDP UdpData;
@@ -125,8 +125,8 @@ void WiFiEvent(WiFiEvent_t event) {
             Serial.println(WiFi.localIP());
 
             // open ports
-            UdpOSC.begin(oscPort);
             UdpData.begin(dataPort);
+            UdpOSC.begin(oscPort);
   
             // send handshake message
             UdpOSC.beginPacket(outIp, outPort);
@@ -185,6 +185,7 @@ void loop(void)
       handshake_message().send(UdpOSC);
       UdpOSC.endPacket();
       
+      Serial.println("--- broadcasting handshake... ---");
       Serial.println(broadcastIP1.toString());
       Serial.println(broadcastIP2.toString());
       Serial.println(broadcastIP3.toString());
@@ -193,17 +194,21 @@ void loop(void)
   }
 
   // Read raw data
-  int packetSize = UdpData.parsePacket();
-  if (packetSize)
+  int packetSize;// = UdpData.parsePacket();
+  //if (packetSize)
+  if ( (packetSize = UdpData.parsePacket()) > 0)
   {
-  char incomingPacket[255];
+    char incomingPacket[255];
     Serial.printf("Received %d bytes from %s, port %d\n", packetSize, UdpData.remoteIP().toString().c_str(), UdpData.remotePort());
-    int len = UdpData.read(incomingPacket, 255);
-    if (len > 0)
-    {
-      incomingPacket[len] = 0;
-    }
     Serial.printf("UDP packet contents: %s\n", incomingPacket);
+    if (UdpData.read(incomingPacket, 255) > 0)
+    {
+      int value = atoi(incomingPacket);
+      // TODO: prendre en compte les moteurs de Jack ?
+      OSCMessage servomsg("/servo");
+      servomsg.add(value);
+      set_servo(servomsg, 0);
+    }
       
   }
 
@@ -270,17 +275,20 @@ void set_servo(OSCMessage &msg, int addrOffset)
   #else
   int index = -1;
   if (msg.match("/0", addrOffset)) index = 0;
-  if (msg.match("/1", addrOffset)) index = 1;
-  if (msg.match("/2", addrOffset)) index = 2;
-  if (msg.match("/3", addrOffset)) index = 3;
-  if (msg.match("/4", addrOffset)) index = 4;
-  if (msg.match("/5", addrOffset)) index = 5;
-  if (msg.match("/6", addrOffset)) index = 6;
+  else if (msg.match("/1", addrOffset)) index = 1;
+  else if (msg.match("/2", addrOffset)) index = 2;
+  //if (msg.match("/3", addrOffset)) index = 3;
+  else if (msg.match("/4", addrOffset)) index = 4;
+  else if (msg.match("/5", addrOffset)) index = 5;
+  else if (msg.match("/6", addrOffset)) index = 6;
+  else index = 3;
   
-  if (index >= 0 && msg.isInt(0))
+  if (msg.isInt(0))
   {
     int servoValue = constrain(SERVO_INIT_VALUE + msg.getInt(0), 0, 180);
     pwm.setPWM(index, 0, map(servoValue, 0, 180, SERVOMIN, SERVOMAX));
+    Serial.print(index);
+    Serial.print(" - ");
     Serial.println(servoValue);
   }
   else send_simple_message("/error");
