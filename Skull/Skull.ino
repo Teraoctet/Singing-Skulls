@@ -6,7 +6,7 @@
 #include "WifiUDP.h"
 #include <EEPROM.h>
 
-#define SOLIST // COMMENT FOR NON SOLISTS
+//#define SOLIST // COMMENT FOR NON SOLISTS
 
 /////////////////
 // ID and NAME //
@@ -17,12 +17,13 @@ const int SKULL_ID = 1; // SET SKULL ID HERE: 1 to 7
 const int SKULL_ID = 0; // do not change
 #endif
 
-String SKULL_NAMES[6] = { "Jack", "Pat", "Ninon", "Sissi", "Jerry", "Hubert"};
+String SKULL_NAMES[6] = { "Jack", "Pat", "Ninon", "Jerry", "Sissi", "Hubert"};
 const String SKULL_NAME = SKULL_NAMES[SKULL_ID];
 
 //////////
 // WiFi //
 //////////
+WiFiEventHandler gotIpEventHandler, disconnectedEventHandler;
 const char* ssid = "LeNet";
 const char* password = "connectemoi";
 const unsigned int outPort = 12345;
@@ -31,15 +32,19 @@ const unsigned int dataPort = 25500;
 const unsigned int tcpPort = 55555;
 WiFiUDP UdpOSC;
 WiFiUDP UdpData;
-IPAddress broadcastIP1(192, 168, 43, 255);
-IPAddress broadcastIP2(192, 168, 1, 255);
-IPAddress broadcastIP3(192, 168, 137, 255);
-IPAddress outIp(192, 168, 43, 255); // the last byte will be set by the EEPROM or the handshake
+char packetBuffer[UDP_TX_PACKET_MAX_SIZE + 1];
+IPAddress broadcastIP1(192, 168, 43, 255); // android hotspot
+IPAddress broadcastIP2(192, 168, 0, 255);
+IPAddress broadcastIP3(192, 168, 1, 255);
+IPAddress broadcastIP4(192, 168, 137, 255); // windows 10 hotspot
+IPAddress broadcastIP5(172, 20, 10, 15); // iphone hotspot
+IPAddress outIp(192, 168, 43, 255); // will be set by the EEPROM or the handshake
 bool connectedToWiFi = false;
 bool gotHandshake = false;
 
 int pingTimeInMs = 1000;
 unsigned long lastPingTime = 0;
+int treatedPackets = 0;
 
 ///////////
 // Servo //
@@ -57,11 +62,10 @@ Adafruit_PWMServoDriver pwm = Adafruit_PWMServoDriver();
 #define SERVOMAX  574 // this is the 'maximum' pulse length count (out of 4096)
 #endif
 
-
 /////////////////
 // Util functions
 /////////////////
-void send_simple_message(char* address)
+void send_simple_message(const char* address)
 {
   OSCMessage msg(address);
   send_message(msg);
@@ -77,33 +81,70 @@ void send_message(OSCMessage &msg)
 
 ////////
 // SETUP
-////////  
+////////
 void setup(void)
 {
   Serial.begin(115200);
   Serial.println("---");
 
-  WiFi.onEvent(WiFiEvent);
+  // set up wifi
+  gotIpEventHandler = WiFi.onStationModeGotIP([](const WiFiEventStationModeGotIP & event)
+  {
+    Serial.print("Connected to ");
+    Serial.println(ssid);
+    Serial.print("IP address: ");
+    Serial.println(WiFi.localIP());
+
+    // open ports
+    UdpData.begin(dataPort);
+    UdpOSC.begin(oscPort);
+
+    // send handshake message
+    UdpOSC.beginPacket(outIp, outPort);
+    handshake_message().send(UdpOSC);
+    UdpOSC.endPacket();
+
+    Serial.println("broadcasting addresses:");
+    Serial.println(broadcastIP1.toString());
+    Serial.println(broadcastIP2.toString());
+    Serial.println(broadcastIP3.toString());
+    Serial.println(broadcastIP4.toString());
+
+    connectedToWiFi = true;
+  });
+
+  disconnectedEventHandler = WiFi.onStationModeDisconnected([](const WiFiEventStationModeDisconnected & event)
+  {
+    connectedToWiFi = false;
+    wifi_connect();
+  });
+
   wifi_connect();
   while (WiFi.status() != WL_CONNECTED)
   {
-    delay(500);
     Serial.print(".");
+    delay(500);
   }
-    
+
   // set up servo
-  #ifndef SOLIST
+#ifndef SOLIST
   pinMode(SERVO_PIN, OUTPUT);
   servo.attach(SERVO_PIN);
   servo.write(SERVO_INIT_VALUE);
-  #else
+#else
   pwm.begin();
   pwm.setPWMFreq(60);  // Analog servos run at ~60 Hz updates
-  #endif
+#endif
 
   // read target ip from EEPROM
   EEPROM.begin(512);
-  outIp[3] = EEPROM.read(0);
+  outIp[0] = EEPROM.read(0);
+  outIp[1] = EEPROM.read(1);
+  outIp[2] = EEPROM.read(2);
+  outIp[3] = EEPROM.read(3);
+
+  Serial.print("target ip: ");
+  Serial.println(outIp.toString());
 }
 
 void wifi_connect()
@@ -111,36 +152,36 @@ void wifi_connect()
   Serial.print("Lost WiFi connection, reconnecting to ");
   Serial.print(ssid);
   Serial.println("...");
-  //WiFi.disconnect(true);
   WiFi.mode(WIFI_STA);
   WiFi.begin(ssid, password);
 }
 
+void set_remote_ip(const IPAddress& ip)
+{
+  // set remote IP
+  outIp = IPAddress(ip);
+  Serial.println(ip.toString());
+  // TODO : deal with ipv6 or MAC addresses
+  // store ip address
+  EEPROM.write(0, (byte)outIp[0]);
+  EEPROM.write(1, (byte)outIp[1]);
+  EEPROM.write(2, (byte)outIp[2]);
+  EEPROM.write(3, (byte)outIp[3]);
+  EEPROM.commit();
+
+  Serial.print("target ip is now: ");
+  Serial.println(outIp.toString());
+  gotHandshake = true;
+}
+
 void WiFiEvent(WiFiEvent_t event) {
-    switch(event) {
-        case WIFI_EVENT_STAMODE_GOT_IP:
-            Serial.print("Connected to ");
-            Serial.println(ssid);
-            Serial.print("IP address: ");
-            Serial.println(WiFi.localIP());
+  switch (event) {
+    case WIFI_EVENT_STAMODE_GOT_IP:
+      break;
 
-            // open ports
-            UdpData.begin(dataPort);
-            UdpOSC.begin(oscPort);
-  
-            // send handshake message
-            UdpOSC.beginPacket(outIp, outPort);
-            handshake_message().send(UdpOSC);
-            UdpOSC.endPacket();
-
-            connectedToWiFi = true;
-            break;
-            
-        case WIFI_EVENT_STAMODE_DISCONNECTED:
-          connectedToWiFi = false;
-            wifi_connect();
-            break;
-    }
+    case WIFI_EVENT_STAMODE_DISCONNECTED:
+      break;
+  }
 }
 
 OSCMessage handshake_message()
@@ -161,7 +202,6 @@ void loop(void)
   // send ping
   if ((unsigned long)(millis() - lastPingTime) > pingTimeInMs)
   {
-    
     if (gotHandshake)
     {
       OSCMessage pingmsg("/ping");
@@ -169,9 +209,11 @@ void loop(void)
       pingmsg.add(SKULL_NAME.c_str());
       pingmsg.add(WiFi.localIP().toString().c_str());
       send_message(pingmsg);
-      
-      //Serial.print("ping to : ");
-      //Serial.println(outIp.toString());
+
+      Serial.print("ping to: ");
+      Serial.println(outIp.toString());
+      if (treatedPackets) Serial.println(treatedPackets);
+      treatedPackets = 0;
     } else
     {
       // broadcast handshake message
@@ -184,95 +226,95 @@ void loop(void)
       UdpOSC.beginPacket(broadcastIP3, outPort);
       handshake_message().send(UdpOSC);
       UdpOSC.endPacket();
-      
+      UdpOSC.beginPacket(broadcastIP4, outPort);
+      handshake_message().send(UdpOSC);
+      UdpOSC.endPacket();
+      UdpOSC.beginPacket(broadcastIP5, outPort);
+      handshake_message().send(UdpOSC);
+      UdpOSC.endPacket();
       Serial.println("--- broadcasting handshake... ---");
-      Serial.println(broadcastIP1.toString());
-      Serial.println(broadcastIP2.toString());
-      Serial.println(broadcastIP3.toString());
+      delay(500);
     }
-      lastPingTime = millis();
+    lastPingTime = millis();
   }
 
+  int packetSize;
+
   // Read raw data
-  int packetSize;// = UdpData.parsePacket();
-  //if (packetSize)
-  if ( (packetSize = UdpData.parsePacket()) > 0)
+  while ( (packetSize = UdpData.parsePacket()) > 0)
   {
-    char incomingPacket[255];
-    Serial.printf("Received %d bytes from %s, port %d\n", packetSize, UdpData.remoteIP().toString().c_str(), UdpData.remotePort());
-    Serial.printf("UDP packet contents: %s\n", incomingPacket);
-    if (UdpData.read(incomingPacket, 255) > 0)
-    {
-      int value = atoi(incomingPacket);
-      // TODO: prendre en compte les moteurs de Jack ?
-      OSCMessage servomsg("/servo");
-      servomsg.add(value);
-      set_servo(servomsg, 0);
-    }
-      
+    //Serial.printf("Received %d bytes from %s, port %d\n", packetSize, UdpData.remoteIP().toString().c_str(), UdpData.remotePort());
+    int n = UdpData.read(packetBuffer, UDP_TX_PACKET_MAX_SIZE);
+    packetBuffer[n] = 0;
+    int value = atoi(packetBuffer);
+    //Serial.printf("UDP packet contents: %s\n", packetBuffer);
+
+    // TODO: prendre en compte les moteurs de Jack ?
+    OSCMessage servomsg("/servo");
+    servomsg.add(value);
+    set_servo(servomsg, 0);
+
+    treatedPackets++;
+    if (!gotHandshake)
+      set_remote_ip(UdpData.remoteIP());
   }
 
   // route OSC messages
   OSCMessage bundleIN;
-  int packet_size;
-  if ( (packet_size = UdpOSC.parsePacket()) > 0)
+  if ( (packetSize = UdpOSC.parsePacket()) > 0)
   {
-    while (packet_size--)
+    while (packetSize--)
       bundleIN.fill(UdpOSC.read());
 
     if (!bundleIN.hasError())
     {
+      treatedPackets++;
+      if (!gotHandshake)
+        set_remote_ip(UdpOSC.remoteIP());
+
       bundleIN.route("/handshake", get_handshake);
       bundleIN.route("/config", send_config);
       bundleIN.route("/servo", set_servo);
+    } else {
+      OSCErrorCode error = bundleIN.getError();
+      Serial.print("error: ");
+      Serial.println(error);
     }
   }
-  
-  // Sanity delay
-  delay(5);
 }
 
-void get_handshake(OSCMessage &msg, int addrOffset)
+void get_handshake(OSCMessage & msg, int addrOffset)
 {
-    Serial.println("got handhake.");
+  Serial.println("got handhake.");
   // exchange IP addresses
   if (msg.isInt(0) && msg.isInt(1) && msg.isInt(2) && msg.isInt(3))
-  { 
-    // set remote IP
-    outIp[0] = msg.getInt(0);
-    outIp[1] = msg.getInt(1);
-    outIp[2] = msg.getInt(2);
-    outIp[3] = msg.getInt(3);
+    set_remote_ip(IPAddress(msg.getInt(0), msg.getInt(1), msg.getInt(2), msg.getInt(3)));
+  else
+    Serial.println("error: ip from handshake is not valid!");
 
-    // store last byte of ip address
-    EEPROM.write(0, (byte)outIp[3]);
-    EEPROM.commit();
-    
-    Serial.print("target ip is now : ");
-    Serial.println(outIp.toString());
-    gotHandshake = true;
-  }
+  // TODO: useless, get remoteIP instead
 }
 
-void send_config(OSCMessage &msg, int addrOffset)
+
+void send_config(OSCMessage & msg, int addrOffset)
 {
   OSCMessage m = handshake_message();
   send_message(m);
 }
 
 
-void set_servo(OSCMessage &msg, int addrOffset)
+void set_servo(OSCMessage & msg, int addrOffset)
 {
-  Serial.print("set servo ");
-  #ifndef SOLIST
+  //Serial.print("set servo ");
+#ifndef SOLIST
   if (msg.isInt(0))
   {
     int servoValue = constrain(SERVO_INIT_VALUE + msg.getInt(0), 0, 180);
     servo.write(servoValue);
-  Serial.println(servoValue);
+    //Serial.println(servoValue);
   }
   else send_simple_message("/error");
-  #else
+#else
   int index = -1;
   if (msg.match("/0", addrOffset)) index = 0;
   else if (msg.match("/1", addrOffset)) index = 1;
@@ -282,7 +324,7 @@ void set_servo(OSCMessage &msg, int addrOffset)
   else if (msg.match("/5", addrOffset)) index = 5;
   else if (msg.match("/6", addrOffset)) index = 6;
   else index = 3;
-  
+
   if (msg.isInt(0))
   {
     int servoValue = constrain(SERVO_INIT_VALUE + msg.getInt(0), 0, 180);
@@ -293,5 +335,5 @@ void set_servo(OSCMessage &msg, int addrOffset)
   }
   else send_simple_message("/error");
 
-  #endif
+#endif
 }
