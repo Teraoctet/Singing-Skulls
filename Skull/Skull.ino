@@ -6,7 +6,7 @@
 #include "WifiUDP.h"
 #include <EEPROM.h>
 
-//#define SOLIST // COMMENT FOR NON SOLISTS
+#define SOLIST // COMMENT FOR NON SOLISTS
 
 /////////////////
 // ID and NAME //
@@ -36,8 +36,9 @@ char packetBuffer[UDP_TX_PACKET_MAX_SIZE + 1];
 IPAddress broadcastIP1(192, 168, 43, 255); // android hotspot
 IPAddress broadcastIP2(192, 168, 0, 255);
 IPAddress broadcastIP3(192, 168, 1, 255);
-IPAddress broadcastIP4(192, 168, 137, 255); // windows 10 hotspot
-IPAddress broadcastIP5(172, 20, 10, 15); // iphone hotspot
+IPAddress broadcastIP4(192, 168, 2, 255);
+IPAddress broadcastIP5(192, 168, 137, 255); // windows 10 hotspot
+IPAddress broadcastIP6(172, 20, 10, 15); // iphone hotspot
 IPAddress outIp(192, 168, 43, 255); // will be set by the EEPROM or the handshake
 bool connectedToWiFi = false;
 bool gotHandshake = false;
@@ -109,6 +110,8 @@ void setup(void)
     Serial.println(broadcastIP2.toString());
     Serial.println(broadcastIP3.toString());
     Serial.println(broadcastIP4.toString());
+    Serial.println(broadcastIP5.toString());
+    Serial.println(broadcastIP6.toString());
 
     connectedToWiFi = true;
   });
@@ -149,6 +152,16 @@ void setup(void)
 
 void wifi_connect()
 {
+#ifndef SOLIST
+#else
+  // recenter motors
+  pwm.setPWM(0, 0, map(152, 0, 180, SERVOMIN, SERVOMAX));
+  pwm.setPWM(0, 0, map(50, 0, 180, SERVOMIN, SERVOMAX));
+  pwm.setPWM(0, 0, map(100, 0, 180, SERVOMIN, SERVOMAX));
+  pwm.setPWM(0, 0, map(50, 0, 180, SERVOMIN, SERVOMAX));
+  pwm.setPWM(0, 0, map(80, 0, 180, SERVOMIN, SERVOMAX));
+#endif
+
   Serial.print("Lost WiFi connection, reconnecting to ");
   Serial.print(ssid);
   Serial.println("...");
@@ -172,16 +185,6 @@ void set_remote_ip(const IPAddress& ip)
   Serial.print("target ip is now: ");
   Serial.println(outIp.toString());
   gotHandshake = true;
-}
-
-void WiFiEvent(WiFiEvent_t event) {
-  switch (event) {
-    case WIFI_EVENT_STAMODE_GOT_IP:
-      break;
-
-    case WIFI_EVENT_STAMODE_DISCONNECTED:
-      break;
-  }
 }
 
 OSCMessage handshake_message()
@@ -230,6 +233,9 @@ void loop(void)
       handshake_message().send(UdpOSC);
       UdpOSC.endPacket();
       UdpOSC.beginPacket(broadcastIP5, outPort);
+      handshake_message().send(UdpOSC);
+      UdpOSC.endPacket();
+      UdpOSC.beginPacket(broadcastIP6, outPort);
       handshake_message().send(UdpOSC);
       UdpOSC.endPacket();
       Serial.println("--- broadcasting handshake... ---");
