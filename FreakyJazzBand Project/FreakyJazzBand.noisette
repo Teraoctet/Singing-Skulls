@@ -276,7 +276,7 @@
                     "niceName": "#2",
                     "type": "Integer",
                     "param": {
-                      "value": 90,
+                      "value": 50,
                       "hexMode": false,
                       "controlAddress": "/modules/serial1/templates/setServo/arguments/_2/newIntParameter",
                       "type": "Integer",
@@ -316,7 +316,7 @@
                 {
                   "parameters": [
                     {
-                      "value": true,
+                      "value": false,
                       "controlAddress": "/appendCR"
                     },
                     {
@@ -376,7 +376,7 @@
               "feedbackOnly": false
             },
             {
-              "value": "Sissi",
+              "value": "Pat",
               "alwaysNotify": true,
               "controlAddress": "/name",
               "type": "String",
@@ -428,7 +428,7 @@
             "controlAddress": "/viewUIPosition"
           },
           {
-            "value": true,
+            "value": false,
             "controlAddress": "/logIncoming"
           },
           {
@@ -456,7 +456,7 @@
               "controlAddress": "/messageStructure"
             },
             {
-              "value": "Not connected or disconnected",
+              "value": "USB Serial Port (COM6)",
               "controlAddress": "/port"
             },
             {
@@ -706,7 +706,7 @@
               "feedbackOnly": false
             },
             {
-              "value": "Pat",
+              "value": "Ninon",
               "alwaysNotify": true,
               "controlAddress": "/name",
               "type": "String",
@@ -716,10 +716,21 @@
               "description": "name",
               "hideInEditor": false,
               "feedbackOnly": false
+            },
+            {
+              "value": 89.0,
+              "controlAddress": "/servoValue",
+              "type": "Float",
+              "niceName": "servoValue",
+              "customizable": true,
+              "removable": true,
+              "description": "servoValue",
+              "hideInEditor": false,
+              "feedbackOnly": false
             }
           ]
         },
-        "portID": "Lien s\trie sur Bluetooth standard (COM15)"
+        "portID": "USB Serial Port (COM6)"
       },
       {
         "parameters": [
@@ -763,7 +774,7 @@
               "controlAddress": "/messageStructure"
             },
             {
-              "value": "USB Serial Port (COM18)",
+              "value": "USB Serial Port (COM7)",
               "controlAddress": "/port"
             },
             {
@@ -1025,7 +1036,7 @@
               "feedbackOnly": false
             },
             {
-              "value": 23.0,
+              "value": 90.0,
               "controlAddress": "/servoValue",
               "type": "Float",
               "niceName": "servoValue",
@@ -1037,7 +1048,7 @@
             }
           ]
         },
-        "portID": "USB Serial Port (COM18)"
+        "portID": "USB Serial Port (COM7)"
       },
       {
         "parameters": [
@@ -1343,7 +1354,7 @@
               "feedbackOnly": false
             },
             {
-              "value": 0.0,
+              "value": 90.0,
               "controlAddress": "/servoValue",
               "type": "Float",
               "niceName": "servoValue",
@@ -1368,7 +1379,7 @@
             "controlAddress": "/logIncoming"
           },
           {
-            "value": true,
+            "value": false,
             "controlAddress": "/logOutgoing"
           }
         ],
@@ -1609,7 +1620,7 @@
         "values": {
           "parameters": [
             {
-              "value": -1,
+              "value": 90,
               "hexMode": false,
               "controlAddress": "/_servo",
               "type": "Integer",
@@ -1622,7 +1633,7 @@
               "shortName": "_servo"
             },
             {
-              "value": 55,
+              "value": 90,
               "hexMode": false,
               "controlAddress": "/_servo_0",
               "type": "Integer",
@@ -1635,7 +1646,7 @@
               "shortName": "_servo_0"
             },
             {
-              "value": -60,
+              "value": 89,
               "hexMode": false,
               "controlAddress": "/_servo_1",
               "type": "Integer",
@@ -1648,7 +1659,7 @@
               "shortName": "_servo_1"
             },
             {
-              "value": 10,
+              "value": 90,
               "hexMode": false,
               "controlAddress": "/_servo_2",
               "type": "Integer",
@@ -1661,7 +1672,7 @@
               "shortName": "_servo_2"
             },
             {
-              "value": 0,
+              "value": 90,
               "hexMode": false,
               "controlAddress": "/_servo_3",
               "type": "Integer",
@@ -1802,7 +1813,7 @@
         "values": {
           "parameters": [
             {
-              "value": -10,
+              "value": 100,
               "hexMode": false,
               "controlAddress": "/_servo",
               "type": "Integer",
@@ -2397,7 +2408,7 @@
             {
               "parameters": [
                 {
-                  "value": 55,
+                  "value": 90,
                   "hexMode": false,
                   "controlAddress": "/outValue"
                 }
@@ -2445,7 +2456,7 @@
                           "controlAddress": "/separator"
                         },
                         {
-                          "value": true,
+                          "value": false,
                           "controlAddress": "/appendCR"
                         },
                         {
@@ -2473,7 +2484,12 @@
                               }
                             ],
                             "niceName": "#2",
-                            "type": "Integer"
+                            "type": "Integer",
+                            "param": {
+                              "value": 90,
+                              "hexMode": false,
+                              "controlAddress": "/states/osc_Serial/processors/crane0/outputs/mappingOutput/command/arguments/_2/newIntParameter"
+                            }
                           }
                         ]
                       }
@@ -2492,7 +2508,7 @@
                   "controlAddress": "/viewUIPosition"
                 },
                 {
-                  "value": -60,
+                  "value": 89,
                   "hexMode": false,
                   "controlAddress": "/outValue"
                 }
@@ -2570,7 +2586,7 @@
                             "niceName": "#2",
                             "type": "Integer",
                             "param": {
-                              "value": -60,
+                              "value": 89,
                               "hexMode": false,
                               "controlAddress": "/states/osc_Serial/processors/crane1/outputs/mappingOutput/command/arguments/_2/newIntParameter"
                             }
@@ -2592,7 +2608,7 @@
                   "controlAddress": "/viewUIPosition"
                 },
                 {
-                  "value": 10,
+                  "value": 90,
                   "hexMode": false,
                   "controlAddress": "/outValue"
                 }
@@ -2670,7 +2686,7 @@
                             "niceName": "#2",
                             "type": "Integer",
                             "param": {
-                              "value": 10,
+                              "value": 90,
                               "hexMode": false,
                               "controlAddress": "/states/osc_Serial/processors/crane2/outputs/mappingOutput/command/arguments/_2/newIntParameter"
                             }
@@ -2692,7 +2708,7 @@
                   "controlAddress": "/viewUIPosition"
                 },
                 {
-                  "value": 0,
+                  "value": 90,
                   "hexMode": false,
                   "controlAddress": "/outValue"
                 }
@@ -2768,7 +2784,12 @@
                               }
                             ],
                             "niceName": "#2",
-                            "type": "Integer"
+                            "type": "Integer",
+                            "param": {
+                              "value": 90,
+                              "hexMode": false,
+                              "controlAddress": "/states/osc_Serial/processors/crane3/outputs/mappingOutput/command/arguments/_2/newIntParameter"
+                            }
                           }
                         ]
                       }
@@ -3078,12 +3099,7 @@
                               }
                             ],
                             "niceName": "#1",
-                            "type": "Integer",
-                            "param": {
-                              "value": 80,
-                              "hexMode": false,
-                              "controlAddress": "/states/osc_Serial/processors/jack2Non/outputs/mappingOutput/command/arguments/_1/newIntParameter"
-                            }
+                            "type": "Integer"
                           }
                         ]
                       }
@@ -3583,7 +3599,7 @@
                             "niceName": "#1",
                             "type": "String",
                             "param": {
-                              "value": "Pat",
+                              "value": "Ninon",
                               "controlMode": 2,
                               "reference": {
                                 "value": "/modules/serial2/values/name",
@@ -4341,7 +4357,7 @@
                             "niceName": "#1",
                             "type": "String",
                             "param": {
-                              "value": "Sissi",
+                              "value": "Pat",
                               "controlMode": 2,
                               "reference": {
                                 "value": "/modules/serial1/values/name",
