@@ -1826,7 +1826,7 @@
               "shortName": "_servo"
             },
             {
-              "value": 142,
+              "value": 130,
               "hexMode": false,
               "controlAddress": "/_servo_0",
               "type": "Integer",
@@ -1839,7 +1839,7 @@
               "shortName": "_servo_0"
             },
             {
-              "value": 41,
+              "value": 38,
               "hexMode": false,
               "controlAddress": "/_servo_1",
               "type": "Integer",
@@ -2206,7 +2206,7 @@
               "feedbackOnly": false
             },
             {
-              "value": 50.0,
+              "value": 38.0,
               "controlAddress": "/servoValue",
               "type": "Float",
               "niceName": "servoValue",
@@ -2219,6 +2219,70 @@
           ]
         },
         "portID": "Silicon Labs CP210x USB to UART Bridge (COM4)"
+      },
+      {
+        "niceName": "OSC Joystick",
+        "type": "OSC",
+        "scripts": {
+        },
+        "params": {
+          "containers": {
+            "oscInput": {
+            },
+            "oscOutputs": {
+              "items": [
+                {
+                  "niceName": "OSC Output",
+                  "type": "BaseItem"
+                }
+              ]
+            }
+          }
+        },
+        "values": {
+        },
+        "input": {
+        },
+        "outputs": {
+          "items": [
+            {
+              "niceName": "OSC Output",
+              "type": "BaseItem"
+            }
+          ]
+        }
+      },
+      {
+        "niceName": "Joystick",
+        "type": "Joystick",
+        "scripts": {
+        },
+        "params": {
+          "parameters": [
+            {
+              "value": [
+                3,
+                0,
+                0,
+                0,
+                109,
+                4,
+                0,
+                0,
+                21,
+                194,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "deviceName": "Logitech Extreme 3D",
+              "controlAddress": "/device"
+            }
+          ]
+        }
       }
     ]
   },
@@ -2808,7 +2872,7 @@
                   "controlAddress": "/viewUIPosition"
                 },
                 {
-                  "value": 142,
+                  "value": 130,
                   "hexMode": false,
                   "controlAddress": "/outValue"
                 }
@@ -2891,7 +2955,7 @@
                             "niceName": "#1",
                             "type": "Integer",
                             "param": {
-                              "value": 142,
+                              "value": 130,
                               "hexMode": false,
                               "controlAddress": "/states/osc_Serial/processors/jack0Aam/outputs/mappingOutput/command/arguments/_1/newIntParameter"
                             }
@@ -2913,7 +2977,7 @@
                   "controlAddress": "/viewUIPosition"
                 },
                 {
-                  "value": 41,
+                  "value": 38,
                   "hexMode": false,
                   "controlAddress": "/outValue"
                 }
@@ -2996,7 +3060,7 @@
                             "niceName": "#1",
                             "type": "Integer",
                             "param": {
-                              "value": 41,
+                              "value": 38,
                               "hexMode": false,
                               "controlAddress": "/states/osc_Serial/processors/jack1Oui/outputs/mappingOutput/command/arguments/_1/newIntParameter"
                             }
@@ -5321,6 +5385,132 @@
             }
           ]
         }
+      }
+    ]
+  },
+  "routerManager": {
+    "items": [
+      {
+        "niceName": "Router",
+        "type": "BaseItem",
+        "sourceModule": "joystick",
+        "sourceValues": {
+          "items": [
+            {
+              "niceName": "Axis 1",
+              "type": "BaseItem",
+              "customName": "Axis 1",
+              "routeParams": {
+              }
+            },
+            {
+              "niceName": "Axis 2",
+              "type": "BaseItem",
+              "customName": "Axis 2",
+              "routeParams": {
+              }
+            },
+            {
+              "niceName": "Axis 3",
+              "type": "BaseItem",
+              "customName": "Axis 3",
+              "routeParams": {
+              }
+            },
+            {
+              "niceName": "Axis 4",
+              "type": "BaseItem",
+              "customName": "Axis 4",
+              "routeParams": {
+              }
+            },
+            {
+              "niceName": "Button 1",
+              "type": "BaseItem",
+              "customName": "Button 1",
+              "routeParams": {
+              }
+            },
+            {
+              "niceName": "Button 2",
+              "type": "BaseItem",
+              "customName": "Button 2",
+              "routeParams": {
+              }
+            },
+            {
+              "niceName": "Button 3",
+              "type": "BaseItem",
+              "customName": "Button 3",
+              "routeParams": {
+              }
+            },
+            {
+              "niceName": "Button 4",
+              "type": "BaseItem",
+              "customName": "Button 4",
+              "routeParams": {
+              }
+            },
+            {
+              "niceName": "Button 5",
+              "type": "BaseItem",
+              "customName": "Button 5",
+              "routeParams": {
+              }
+            },
+            {
+              "niceName": "Button 6",
+              "type": "BaseItem",
+              "customName": "Button 6",
+              "routeParams": {
+              }
+            },
+            {
+              "niceName": "Button 7",
+              "type": "BaseItem",
+              "customName": "Button 7",
+              "routeParams": {
+              }
+            },
+            {
+              "niceName": "Button 8",
+              "type": "BaseItem",
+              "customName": "Button 8",
+              "routeParams": {
+              }
+            },
+            {
+              "niceName": "Button 9",
+              "type": "BaseItem",
+              "customName": "Button 9",
+              "routeParams": {
+              }
+            },
+            {
+              "niceName": "Button 10",
+              "type": "BaseItem",
+              "customName": "Button 10",
+              "routeParams": {
+              }
+            },
+            {
+              "niceName": "Button 11",
+              "type": "BaseItem",
+              "customName": "Button 11",
+              "routeParams": {
+              }
+            },
+            {
+              "niceName": "Button 12",
+              "type": "BaseItem",
+              "customName": "Button 12",
+              "routeParams": {
+              }
+            }
+          ]
+        },
+        "destModule": "oscJoystick"
       }
     ]
   }
