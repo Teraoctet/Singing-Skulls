@@ -1,13 +1,13 @@
-const String FIRMWARE_VERSION = "SS-v3.0";
+const String FIRMWARE_VERSION = "SS-v3.2";
 
-//#define MULTI_SERVO // COMMENT FOR CHOIR SKULLS
+#define MULTI_SERVO // COMMENT FOR CHOIR SKULLS
 
 
 /////////////////
 // ID and NAME //
 /////////////////
 #ifndef MULTI_SERVO
-const int SKULL_ID = 1; // SET SKULL ID HERE: 1 to 7
+const int SKULL_ID = 1; // SET SKULL ID HERE: 1 to 5
 #else
 const int SKULL_ID = 0; // do not change
 #endif
@@ -59,8 +59,6 @@ void handshake()
 {
   Serial.println("name:" + String(SKULL_NAME));
   Serial.println("firmware:" + String(FIRMWARE_VERSION));
-  // local IP
-  // target IP
 }
 
 void loop()
@@ -74,15 +72,15 @@ void loop()
 
   while (Serial.available()) {
     byte inputSize = Serial.readBytesUntil('\n', incBuffer, INPUT_SIZE);
-    if (incBuffer[inputSize] == '\r')
-    {
-      //incBuffer[inputSize] = "";
+
+    // remove CR
+    if (incBuffer[inputSize-1] == '\r')
       inputSize--;
-    }
 
     // Answer to handshake
-    if (!strcmp(incBuffer, "handshake"))
-      handshake();
+    if (inputSize == 9)
+      if(strcmp(incBuffer, "handshake"))
+        handshake();
 
     // Otherwise look for separator
     char* separator = strchr(&incBuffer[0], ':');
