@@ -1,6 +1,6 @@
 {
   "metaData": {
-    "version": "1.6.5b7",
+    "version": "1.6.5",
     "versionNumber": 67077
   },
   "dashboardManager": {
@@ -114,7 +114,7 @@
             "controlAddress": "/logIncoming"
           },
           {
-            "value": true,
+            "value": false,
             "controlAddress": "/logOutgoing"
           }
         ],
@@ -138,7 +138,11 @@
               "controlAddress": "/messageStructure"
             },
             {
-              "value": "USB Serial Port (COM5)",
+              "value": true,
+              "controlAddress": "/firstValueIsTheName"
+            },
+            {
+              "value": "FTDI FT231X USB UART DN03FA9L(SN : DN03FA9L)",
               "controlAddress": "/port"
             },
             {
@@ -181,7 +185,7 @@
                 {
                   "parameters": [
                     {
-                      "value": false,
+                      "value": true,
                       "controlAddress": "/appendCR"
                     },
                     {
@@ -203,7 +207,7 @@
                 {
                   "parameters": [
                     {
-                      "value": true,
+                      "value": false,
                       "controlAddress": "/appendNL"
                     },
                     {
@@ -316,7 +320,7 @@
                 {
                   "parameters": [
                     {
-                      "value": false,
+                      "value": true,
                       "controlAddress": "/appendCR"
                     },
                     {
@@ -338,7 +342,7 @@
                 {
                   "parameters": [
                     {
-                      "value": true,
+                      "value": false,
                       "controlAddress": "/appendNL"
                     },
                     {
@@ -388,7 +392,7 @@
               "feedbackOnly": false
             },
             {
-              "value": "SS-v3.0",
+              "value": "SS-v3.2",
               "alwaysNotify": true,
               "controlAddress": "/firmware",
               "type": "String",
@@ -412,7 +416,7 @@
             }
           ]
         },
-        "portID": "USB Serial Port (COM5)"
+        "portID": "USB VID:PID=0403:6015 SNR=DN03FA9L"
       },
       {
         "parameters": [
@@ -432,7 +436,7 @@
             "controlAddress": "/logIncoming"
           },
           {
-            "value": true,
+            "value": false,
             "controlAddress": "/logOutgoing"
           }
         ],
@@ -456,7 +460,11 @@
               "controlAddress": "/messageStructure"
             },
             {
-              "value": "USB Serial Port (COM6)",
+              "value": true,
+              "controlAddress": "/firstValueIsTheName"
+            },
+            {
+              "value": "FTDI FT231X USB UART DN03FBCE(SN : DN03FBCE)",
               "controlAddress": "/port"
             },
             {
@@ -499,7 +507,7 @@
                 {
                   "parameters": [
                     {
-                      "value": false,
+                      "value": true,
                       "controlAddress": "/appendCR"
                     },
                     {
@@ -521,7 +529,7 @@
                 {
                   "parameters": [
                     {
-                      "value": true,
+                      "value": false,
                       "controlAddress": "/appendNL"
                     },
                     {
@@ -634,7 +642,7 @@
                 {
                   "parameters": [
                     {
-                      "value": false,
+                      "value": true,
                       "controlAddress": "/appendCR"
                     },
                     {
@@ -656,7 +664,7 @@
                 {
                   "parameters": [
                     {
-                      "value": true,
+                      "value": false,
                       "controlAddress": "/appendNL"
                     },
                     {
@@ -694,7 +702,7 @@
               "feedbackOnly": false
             },
             {
-              "value": "SS-v3.0",
+              "value": "SS-v3.2",
               "alwaysNotify": true,
               "controlAddress": "/firmware",
               "type": "String",
@@ -730,7 +738,7 @@
             }
           ]
         },
-        "portID": "USB Serial Port (COM6)"
+        "portID": "USB VID:PID=0403:6015 SNR=DN03FBCE"
       },
       {
         "parameters": [
@@ -750,7 +758,7 @@
             "controlAddress": "/logIncoming"
           },
           {
-            "value": true,
+            "value": false,
             "controlAddress": "/logOutgoing"
           }
         ],
@@ -774,7 +782,11 @@
               "controlAddress": "/messageStructure"
             },
             {
-              "value": "USB Serial Port (COM7)",
+              "value": true,
+              "controlAddress": "/firstValueIsTheName"
+            },
+            {
+              "value": "FTDI FT231X USB UART DN02MM39(SN : DN02MM39)",
               "controlAddress": "/port"
             },
             {
@@ -817,7 +829,7 @@
                 {
                   "parameters": [
                     {
-                      "value": false,
+                      "value": true,
                       "controlAddress": "/appendCR"
                     },
                     {
@@ -839,7 +851,7 @@
                 {
                   "parameters": [
                     {
-                      "value": true,
+                      "value": false,
                       "controlAddress": "/appendNL"
                     },
                     {
@@ -952,7 +964,7 @@
                 {
                   "parameters": [
                     {
-                      "value": false,
+                      "value": true,
                       "controlAddress": "/appendCR"
                     },
                     {
@@ -974,7 +986,7 @@
                 {
                   "parameters": [
                     {
-                      "value": true,
+                      "value": false,
                       "controlAddress": "/appendNL"
                     },
                     {
@@ -1024,7 +1036,7 @@
               "feedbackOnly": false
             },
             {
-              "value": "SS-v3.0",
+              "value": "SS-v3.3",
               "alwaysNotify": true,
               "controlAddress": "/firmware",
               "type": "String",
@@ -1036,7 +1048,7 @@
               "feedbackOnly": false
             },
             {
-              "value": 90.0,
+              "value": 0.0,
               "controlAddress": "/servoValue",
               "type": "Float",
               "niceName": "servoValue",
@@ -1048,7 +1060,7 @@
             }
           ]
         },
-        "portID": "USB Serial Port (COM7)"
+        "portID": "USB VID:PID=0403:6015 SNR=DN02MM39"
       },
       {
         "parameters": [
@@ -1068,7 +1080,7 @@
             "controlAddress": "/logIncoming"
           },
           {
-            "value": true,
+            "value": false,
             "controlAddress": "/logOutgoing"
           }
         ],
@@ -1092,7 +1104,11 @@
               "controlAddress": "/messageStructure"
             },
             {
-              "value": "USB Serial Port (COM3)",
+              "value": true,
+              "controlAddress": "/firstValueIsTheName"
+            },
+            {
+              "value": "FTDI FT231X USB UART DN02MM34(SN : DN02MM34)",
               "controlAddress": "/port"
             },
             {
@@ -1135,7 +1151,7 @@
                 {
                   "parameters": [
                     {
-                      "value": false,
+                      "value": true,
                       "controlAddress": "/appendCR"
                     },
                     {
@@ -1157,7 +1173,7 @@
                 {
                   "parameters": [
                     {
-                      "value": true,
+                      "value": false,
                       "controlAddress": "/appendNL"
                     },
                     {
@@ -1270,7 +1286,7 @@
                 {
                   "parameters": [
                     {
-                      "value": false,
+                      "value": true,
                       "controlAddress": "/appendCR"
                     },
                     {
@@ -1292,7 +1308,7 @@
                 {
                   "parameters": [
                     {
-                      "value": true,
+                      "value": false,
                       "controlAddress": "/appendNL"
                     },
                     {
@@ -1342,7 +1358,7 @@
               "feedbackOnly": false
             },
             {
-              "value": "SS-v3.0",
+              "value": "SS-v3.2",
               "alwaysNotify": true,
               "controlAddress": "/firmware",
               "type": "String",
@@ -1354,7 +1370,7 @@
               "feedbackOnly": false
             },
             {
-              "value": 90.0,
+              "value": 0.0,
               "controlAddress": "/servoValue",
               "type": "Float",
               "niceName": "servoValue",
@@ -1366,7 +1382,7 @@
             }
           ]
         },
-        "portID": "USB Serial Port (COM3)"
+        "portID": "USB VID:PID=0403:6015 SNR=DN02MM34"
       },
       {
         "parameters": [
@@ -1375,7 +1391,7 @@
             "controlAddress": "/enabled"
           },
           {
-            "value": true,
+            "value": false,
             "controlAddress": "/logIncoming"
           },
           {
@@ -1409,6 +1425,19 @@
                 {
                   "parameters": [
                     {
+                      "value": false,
+                      "controlAddress": "/local"
+                    },
+                    {
+                      "value": "192.168.0.101",
+                      "controlMode": 2,
+                      "reference": {
+                        "value": "/modules/oscChorale/values/_handshake",
+                        "controlAddress": "/reference"
+                      },
+                      "controlAddress": "/remoteHost"
+                    },
+                    {
                       "value": 12345,
                       "hexMode": false,
                       "controlAddress": "/remotePort"
@@ -1422,6 +1451,7 @@
           }
         },
         "templates": {
+          "editorIsCollapsed": true,
           "items": [
             {
               "niceName": "Id",
@@ -1659,7 +1689,7 @@
               "shortName": "_servo_1"
             },
             {
-              "value": 90,
+              "value": 0,
               "hexMode": false,
               "controlAddress": "/_servo_2",
               "type": "Integer",
@@ -1672,7 +1702,7 @@
               "shortName": "_servo_2"
             },
             {
-              "value": 90,
+              "value": 0,
               "hexMode": false,
               "controlAddress": "/_servo_3",
               "type": "Integer",
@@ -1712,7 +1742,7 @@
               "shortName": "_servo_5"
             },
             {
-              "value": "127",
+              "value": "192.168.0.101",
               "alwaysNotify": true,
               "controlAddress": "/_handshake",
               "type": "String",
@@ -1739,6 +1769,19 @@
             {
               "parameters": [
                 {
+                  "value": false,
+                  "controlAddress": "/local"
+                },
+                {
+                  "value": "192.168.0.101",
+                  "controlMode": 2,
+                  "reference": {
+                    "value": "/modules/oscChorale/values/_handshake",
+                    "controlAddress": "/reference"
+                  },
+                  "controlAddress": "/remoteHost"
+                },
+                {
                   "value": 12345,
                   "hexMode": false,
                   "controlAddress": "/remotePort"
@@ -1764,11 +1807,11 @@
             "controlAddress": "/viewUIPosition"
           },
           {
-            "value": true,
+            "value": false,
             "controlAddress": "/logIncoming"
           },
           {
-            "value": true,
+            "value": false,
             "controlAddress": "/logOutgoing"
           }
         ],
@@ -1798,6 +1841,19 @@
                 {
                   "parameters": [
                     {
+                      "value": false,
+                      "controlAddress": "/local"
+                    },
+                    {
+                      "value": "192.168.0.101",
+                      "controlMode": 2,
+                      "reference": {
+                        "value": "/modules/oscChorale/values/_handshake",
+                        "controlAddress": "/reference"
+                      },
+                      "controlAddress": "/remoteHost"
+                    },
+                    {
                       "value": 12345,
                       "hexMode": false,
                       "controlAddress": "/remotePort"
@@ -1826,7 +1882,7 @@
               "shortName": "_servo"
             },
             {
-              "value": 130,
+              "value": 135,
               "hexMode": false,
               "controlAddress": "/_servo_0",
               "type": "Integer",
@@ -1839,7 +1895,7 @@
               "shortName": "_servo_0"
             },
             {
-              "value": 38,
+              "value": 53,
               "hexMode": false,
               "controlAddress": "/_servo_1",
               "type": "Integer",
@@ -1852,7 +1908,7 @@
               "shortName": "_servo_1"
             },
             {
-              "value": 80,
+              "value": 118,
               "hexMode": false,
               "controlAddress": "/_servo_2",
               "type": "Integer",
@@ -1878,7 +1934,7 @@
               "shortName": "_servo_3"
             },
             {
-              "value": 78,
+              "value": 55,
               "hexMode": false,
               "controlAddress": "/_servo_4",
               "type": "Integer",
@@ -1891,7 +1947,7 @@
               "shortName": "_servo_4"
             },
             {
-              "value": 77,
+              "value": 78,
               "hexMode": false,
               "controlAddress": "/_servo_5",
               "type": "Integer",
@@ -1919,6 +1975,19 @@
             {
               "parameters": [
                 {
+                  "value": false,
+                  "controlAddress": "/local"
+                },
+                {
+                  "value": "192.168.0.101",
+                  "controlMode": 2,
+                  "reference": {
+                    "value": "/modules/oscChorale/values/_handshake",
+                    "controlAddress": "/reference"
+                  },
+                  "controlAddress": "/remoteHost"
+                },
+                {
                   "value": 12345,
                   "hexMode": false,
                   "controlAddress": "/remotePort"
@@ -1935,6 +2004,10 @@
           {
             "value": true,
             "controlAddress": "/enabled"
+          },
+          {
+            "value": true,
+            "controlAddress": "/logIncoming"
           }
         ],
         "niceName": "Serial Jack",
@@ -1948,7 +2021,7 @@
               "controlAddress": "/messageStructure"
             },
             {
-              "value": "Silicon Labs CP210x USB to UART Bridge (COM4)",
+              "value": "Silicon Labs CP2104 USB to UART Bridge Controller 0158976F(SN : 0158976F)",
               "controlAddress": "/port"
             },
             {
@@ -2013,7 +2086,7 @@
                 {
                   "parameters": [
                     {
-                      "value": true,
+                      "value": false,
                       "controlAddress": "/appendNL"
                     },
                     {
@@ -2143,7 +2216,7 @@
                 {
                   "parameters": [
                     {
-                      "value": true,
+                      "value": false,
                       "controlAddress": "/appendNL"
                     },
                     {
@@ -2194,7 +2267,7 @@
               "feedbackOnly": false
             },
             {
-              "value": "SS-v3.0",
+              "value": "SS-v3.3",
               "alwaysNotify": true,
               "controlAddress": "/firmware",
               "type": "String",
@@ -2206,7 +2279,7 @@
               "feedbackOnly": false
             },
             {
-              "value": 38.0,
+              "value": 118.0,
               "controlAddress": "/servoValue",
               "type": "Float",
               "niceName": "servoValue",
@@ -2218,7 +2291,7 @@
             }
           ]
         },
-        "portID": "Silicon Labs CP210x USB to UART Bridge (COM4)"
+        "portID": "USB VID:PID=10c4:ea60 SNR=0158976F"
       },
       {
         "niceName": "OSC Joystick",
@@ -2232,6 +2305,12 @@
             "oscOutputs": {
               "items": [
                 {
+                  "parameters": [
+                    {
+                      "value": "127.0.0.1",
+                      "controlAddress": "/remoteHost"
+                    }
+                  ],
                   "niceName": "OSC Output",
                   "type": "BaseItem"
                 }
@@ -2246,42 +2325,51 @@
         "outputs": {
           "items": [
             {
+              "parameters": [
+                {
+                  "value": "127.0.0.1",
+                  "controlAddress": "/remoteHost"
+                }
+              ],
               "niceName": "OSC Output",
               "type": "BaseItem"
             }
           ]
         }
-      },
+      }
+    ]
+  },
+  "customVariables": {
+    "items": [
       {
-        "niceName": "Joystick",
-        "type": "Joystick",
-        "scripts": {
-        },
+        "niceName": "IPS",
+        "type": "BaseItem",
         "params": {
-          "parameters": [
+        },
+        "variables": {
+          "items": [
             {
-              "value": [
-                3,
-                0,
-                0,
-                0,
-                109,
-                4,
-                0,
-                0,
-                21,
-                194,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0
+              "parameters": [
+                {
+                  "value": "192.168.0.100",
+                  "controlAddress": "/localIP",
+                  "type": "String",
+                  "niceName": "local IP",
+                  "customizable": true,
+                  "removable": false,
+                  "description": "Custom control of type String",
+                  "hideInEditor": false,
+                  "feedbackOnly": false
+                }
               ],
-              "deviceName": "Logitech Extreme 3D",
-              "controlAddress": "/device"
+              "niceName": "local IP",
+              "type": "String Parameter"
             }
           ]
+        },
+        "presets": {
+        },
+        "morpher": {
         }
       }
     ]
@@ -2362,11 +2450,11 @@
                           "controlAddress": "/value"
                         },
                         {
-                          "value": false,
+                          "value": true,
                           "controlAddress": "/appendCR"
                         },
                         {
-                          "value": true,
+                          "value": false,
                           "controlAddress": "/appendNL"
                         }
                       ]
@@ -2385,11 +2473,11 @@
                           "controlAddress": "/value"
                         },
                         {
-                          "value": false,
+                          "value": true,
                           "controlAddress": "/appendCR"
                         },
                         {
-                          "value": true,
+                          "value": false,
                           "controlAddress": "/appendNL"
                         }
                       ]
@@ -2408,11 +2496,11 @@
                           "controlAddress": "/value"
                         },
                         {
-                          "value": false,
+                          "value": true,
                           "controlAddress": "/appendCR"
                         },
                         {
-                          "value": true,
+                          "value": false,
                           "controlAddress": "/appendNL"
                         }
                       ]
@@ -2431,11 +2519,11 @@
                           "controlAddress": "/value"
                         },
                         {
-                          "value": false,
+                          "value": true,
                           "controlAddress": "/appendCR"
                         },
                         {
-                          "value": true,
+                          "value": false,
                           "controlAddress": "/appendNL"
                         }
                       ]
@@ -2458,7 +2546,7 @@
                           "controlAddress": "/appendCR"
                         },
                         {
-                          "value": true,
+                          "value": false,
                           "controlAddress": "/appendNL"
                         }
                       ]
@@ -2520,11 +2608,11 @@
                           "controlAddress": "/separator"
                         },
                         {
-                          "value": false,
+                          "value": true,
                           "controlAddress": "/appendCR"
                         },
                         {
-                          "value": true,
+                          "value": false,
                           "controlAddress": "/appendNL"
                         }
                       ],
@@ -2620,11 +2708,11 @@
                           "controlAddress": "/separator"
                         },
                         {
-                          "value": false,
+                          "value": true,
                           "controlAddress": "/appendCR"
                         },
                         {
-                          "value": true,
+                          "value": false,
                           "controlAddress": "/appendNL"
                         }
                       ],
@@ -2672,7 +2760,7 @@
                   "controlAddress": "/viewUIPosition"
                 },
                 {
-                  "value": 90,
+                  "value": 0,
                   "hexMode": false,
                   "controlAddress": "/outValue"
                 }
@@ -2720,11 +2808,11 @@
                           "controlAddress": "/separator"
                         },
                         {
-                          "value": false,
+                          "value": true,
                           "controlAddress": "/appendCR"
                         },
                         {
-                          "value": true,
+                          "value": false,
                           "controlAddress": "/appendNL"
                         }
                       ],
@@ -2748,12 +2836,7 @@
                               }
                             ],
                             "niceName": "#2",
-                            "type": "Integer",
-                            "param": {
-                              "value": 90,
-                              "hexMode": false,
-                              "controlAddress": "/states/osc_Serial/processors/crane2/outputs/mappingOutput/command/arguments/_2/newIntParameter"
-                            }
+                            "type": "Integer"
                           }
                         ]
                       }
@@ -2772,7 +2855,7 @@
                   "controlAddress": "/viewUIPosition"
                 },
                 {
-                  "value": 90,
+                  "value": 0,
                   "hexMode": false,
                   "controlAddress": "/outValue"
                 }
@@ -2820,11 +2903,11 @@
                           "controlAddress": "/separator"
                         },
                         {
-                          "value": false,
+                          "value": true,
                           "controlAddress": "/appendCR"
                         },
                         {
-                          "value": true,
+                          "value": false,
                           "controlAddress": "/appendNL"
                         }
                       ],
@@ -2848,12 +2931,7 @@
                               }
                             ],
                             "niceName": "#2",
-                            "type": "Integer",
-                            "param": {
-                              "value": 90,
-                              "hexMode": false,
-                              "controlAddress": "/states/osc_Serial/processors/crane3/outputs/mappingOutput/command/arguments/_2/newIntParameter"
-                            }
+                            "type": "Integer"
                           }
                         ]
                       }
@@ -2872,7 +2950,7 @@
                   "controlAddress": "/viewUIPosition"
                 },
                 {
-                  "value": 130,
+                  "value": 135,
                   "hexMode": false,
                   "controlAddress": "/outValue"
                 }
@@ -2924,7 +3002,7 @@
                           "controlAddress": "/appendCR"
                         },
                         {
-                          "value": true,
+                          "value": false,
                           "controlAddress": "/appendNL"
                         }
                       ],
@@ -2955,7 +3033,7 @@
                             "niceName": "#1",
                             "type": "Integer",
                             "param": {
-                              "value": 130,
+                              "value": 135,
                               "hexMode": false,
                               "controlAddress": "/states/osc_Serial/processors/jack0Aam/outputs/mappingOutput/command/arguments/_1/newIntParameter"
                             }
@@ -2977,7 +3055,7 @@
                   "controlAddress": "/viewUIPosition"
                 },
                 {
-                  "value": 38,
+                  "value": 53,
                   "hexMode": false,
                   "controlAddress": "/outValue"
                 }
@@ -3029,7 +3107,7 @@
                           "controlAddress": "/appendCR"
                         },
                         {
-                          "value": true,
+                          "value": false,
                           "controlAddress": "/appendNL"
                         }
                       ],
@@ -3060,7 +3138,7 @@
                             "niceName": "#1",
                             "type": "Integer",
                             "param": {
-                              "value": 38,
+                              "value": 53,
                               "hexMode": false,
                               "controlAddress": "/states/osc_Serial/processors/jack1Oui/outputs/mappingOutput/command/arguments/_1/newIntParameter"
                             }
@@ -3082,7 +3160,7 @@
                   "controlAddress": "/viewUIPosition"
                 },
                 {
-                  "value": 80,
+                  "value": 118,
                   "hexMode": false,
                   "controlAddress": "/outValue"
                 }
@@ -3134,7 +3212,7 @@
                           "controlAddress": "/appendCR"
                         },
                         {
-                          "value": true,
+                          "value": false,
                           "controlAddress": "/appendNL"
                         }
                       ],
@@ -3163,7 +3241,12 @@
                               }
                             ],
                             "niceName": "#1",
-                            "type": "Integer"
+                            "type": "Integer",
+                            "param": {
+                              "value": 118,
+                              "hexMode": false,
+                              "controlAddress": "/states/osc_Serial/processors/jack2Non/outputs/mappingOutput/command/arguments/_1/newIntParameter"
+                            }
                           }
                         ]
                       }
@@ -3234,7 +3317,7 @@
                           "controlAddress": "/appendCR"
                         },
                         {
-                          "value": true,
+                          "value": false,
                           "controlAddress": "/appendNL"
                         }
                       ],
@@ -3287,7 +3370,7 @@
                   "controlAddress": "/viewUIPosition"
                 },
                 {
-                  "value": 78,
+                  "value": 55,
                   "hexMode": false,
                   "controlAddress": "/outValue"
                 }
@@ -3339,7 +3422,7 @@
                           "controlAddress": "/appendCR"
                         },
                         {
-                          "value": true,
+                          "value": false,
                           "controlAddress": "/appendNL"
                         }
                       ],
@@ -3370,7 +3453,7 @@
                             "niceName": "#1",
                             "type": "Integer",
                             "param": {
-                              "value": 78,
+                              "value": 55,
                               "hexMode": false,
                               "controlAddress": "/states/osc_Serial/processors/jack4YeuxY/outputs/mappingOutput/command/arguments/_1/newIntParameter"
                             }
@@ -3392,7 +3475,7 @@
                   "controlAddress": "/viewUIPosition"
                 },
                 {
-                  "value": 77,
+                  "value": 78,
                   "hexMode": false,
                   "controlAddress": "/outValue"
                 }
@@ -3444,7 +3527,7 @@
                           "controlAddress": "/appendCR"
                         },
                         {
-                          "value": true,
+                          "value": false,
                           "controlAddress": "/appendNL"
                         }
                       ],
@@ -3475,7 +3558,7 @@
                             "niceName": "#1",
                             "type": "Integer",
                             "param": {
-                              "value": 77,
+                              "value": 78,
                               "hexMode": false,
                               "controlAddress": "/states/osc_Serial/processors/jack5YeuxX/outputs/mappingOutput/command/arguments/_1/newIntParameter"
                             }
@@ -3571,8 +3654,6 @@
                     "commandPath": "Templates",
                     "commandType": "Id",
                     "command": {
-                      "arguments": {
-                      },
                       "argManager": {
                         "items": [
                           {
@@ -3641,8 +3722,6 @@
                     "commandPath": "Templates",
                     "commandType": "Name",
                     "command": {
-                      "arguments": {
-                      },
                       "argManager": {
                         "items": [
                           {
@@ -3733,8 +3812,6 @@
                     "commandPath": "Templates",
                     "commandType": "Firmware",
                     "command": {
-                      "arguments": {
-                      },
                       "argManager": {
                         "items": [
                           {
@@ -3755,7 +3832,7 @@
                             "niceName": "#1",
                             "type": "String",
                             "param": {
-                              "value": "SS-v3.0",
+                              "value": "SS-v3.2",
                               "controlMode": 2,
                               "reference": {
                                 "value": "/modules/serial2/values/firmware",
@@ -3783,7 +3860,7 @@
                   "controlAddress": "/viewUIPosition"
                 }
               ],
-              "niceName": "ip (from name)",
+              "niceName": "local ip (t by name)",
               "editorIsCollapsed": true,
               "type": "Action",
               "conditions": {
@@ -3831,8 +3908,6 @@
                           "controlAddress": "/address"
                         }
                       ],
-                      "arguments": {
-                      },
                       "argManager": {
                         "items": [
                           {
@@ -3846,15 +3921,20 @@
                                 "controlAddress": "/reference"
                               },
                               "hexMode": false,
-                              "controlAddress": "/states/serial2_OSCChorale/processors/ip_fromName_/consequencesTRUE/consequence/command/arguments/_2/newIntParameter"
+                              "controlAddress": "/states/serial2_OSCChorale/processors/localIp_tByName_/consequencesTRUE/consequence/command/arguments/_2/newIntParameter"
                             }
                           },
                           {
                             "niceName": "#1",
                             "type": "String",
                             "param": {
-                              "value": "127.0.0.1",
-                              "controlAddress": "/states/serial2_OSCChorale/processors/ip_fromName_/consequencesTRUE/consequence/command/arguments/_1/newStringParameter"
+                              "value": "192.168.0.100",
+                              "controlMode": 2,
+                              "reference": {
+                                "value": "/customVariables/ips/variables/localIP/localIP",
+                                "controlAddress": "/reference"
+                              },
+                              "controlAddress": "/states/serial2_OSCChorale/processors/localIp_tByName_/consequencesTRUE/consequence/command/arguments/_1/newStringParameter"
                             }
                           }
                         ]
@@ -3950,8 +4030,6 @@
                     "commandPath": "Templates",
                     "commandType": "Id",
                     "command": {
-                      "arguments": {
-                      },
                       "argManager": {
                         "items": [
                           {
@@ -4020,8 +4098,6 @@
                     "commandPath": "Templates",
                     "commandType": "Name",
                     "command": {
-                      "arguments": {
-                      },
                       "argManager": {
                         "items": [
                           {
@@ -4112,8 +4188,6 @@
                     "commandPath": "Templates",
                     "commandType": "Firmware",
                     "command": {
-                      "arguments": {
-                      },
                       "argManager": {
                         "items": [
                           {
@@ -4134,7 +4208,7 @@
                             "niceName": "#1",
                             "type": "String",
                             "param": {
-                              "value": "SS-v3.0",
+                              "value": "SS-v3.3",
                               "controlMode": 2,
                               "reference": {
                                 "value": "/modules/serial3/values/firmware",
@@ -4162,7 +4236,7 @@
                   "controlAddress": "/viewUIPosition"
                 }
               ],
-              "niceName": "ip (from name)",
+              "niceName": "local ip (t by name)",
               "editorIsCollapsed": true,
               "type": "Action",
               "conditions": {
@@ -4210,8 +4284,6 @@
                           "controlAddress": "/address"
                         }
                       ],
-                      "arguments": {
-                      },
                       "argManager": {
                         "items": [
                           {
@@ -4225,15 +4297,20 @@
                                 "controlAddress": "/reference"
                               },
                               "hexMode": false,
-                              "controlAddress": "/states/serial3_OSCChorale/processors/ip_fromName_/consequencesTRUE/consequence/command/arguments/_2/newIntParameter"
+                              "controlAddress": "/states/serial3_OSCChorale/processors/localIp_tByName_/consequencesTRUE/consequence/command/arguments/_2/newIntParameter"
                             }
                           },
                           {
                             "niceName": "#1",
                             "type": "String",
                             "param": {
-                              "value": "127.0.0.1",
-                              "controlAddress": "/states/serial3_OSCChorale/processors/ip_fromName_/consequencesTRUE/consequence/command/arguments/_1/newStringParameter"
+                              "value": "192.168.0.100",
+                              "controlMode": 2,
+                              "reference": {
+                                "value": "/customVariables/ips/variables/localIP/localIP",
+                                "controlAddress": "/reference"
+                              },
+                              "controlAddress": "/states/serial3_OSCChorale/processors/localIp_tByName_/consequencesTRUE/consequence/command/arguments/_1/newStringParameter"
                             }
                           }
                         ]
@@ -4329,8 +4406,6 @@
                     "commandPath": "Templates",
                     "commandType": "Id",
                     "command": {
-                      "arguments": {
-                      },
                       "argManager": {
                         "items": [
                           {
@@ -4399,8 +4474,6 @@
                     "commandPath": "Templates",
                     "commandType": "Name",
                     "command": {
-                      "arguments": {
-                      },
                       "argManager": {
                         "items": [
                           {
@@ -4491,8 +4564,6 @@
                     "commandPath": "Templates",
                     "commandType": "Firmware",
                     "command": {
-                      "arguments": {
-                      },
                       "argManager": {
                         "items": [
                           {
@@ -4513,7 +4584,7 @@
                             "niceName": "#1",
                             "type": "String",
                             "param": {
-                              "value": "SS-v3.0",
+                              "value": "SS-v3.2",
                               "controlMode": 2,
                               "reference": {
                                 "value": "/modules/serial1/values/firmware",
@@ -4541,7 +4612,7 @@
                   "controlAddress": "/viewUIPosition"
                 }
               ],
-              "niceName": "ip (from name)",
+              "niceName": "local ip (t by name)",
               "editorIsCollapsed": true,
               "type": "Action",
               "conditions": {
@@ -4589,8 +4660,6 @@
                           "controlAddress": "/address"
                         }
                       ],
-                      "arguments": {
-                      },
                       "argManager": {
                         "items": [
                           {
@@ -4604,15 +4673,20 @@
                                 "controlAddress": "/reference"
                               },
                               "hexMode": false,
-                              "controlAddress": "/states/serial1_OSCChorale/processors/ip_fromName_/consequencesTRUE/consequence/command/arguments/_2/newIntParameter"
+                              "controlAddress": "/states/serial1_OSCChorale/processors/localIp_tByName_/consequencesTRUE/consequence/command/arguments/_2/newIntParameter"
                             }
                           },
                           {
                             "niceName": "#1",
                             "type": "String",
                             "param": {
-                              "value": "127.0.0.1",
-                              "controlAddress": "/states/serial1_OSCChorale/processors/ip_fromName_/consequencesTRUE/consequence/command/arguments/_1/newStringParameter"
+                              "value": "192.168.0.100",
+                              "controlMode": 2,
+                              "reference": {
+                                "value": "/customVariables/ips/variables/localIP/localIP",
+                                "controlAddress": "/reference"
+                              },
+                              "controlAddress": "/states/serial1_OSCChorale/processors/localIp_tByName_/consequencesTRUE/consequence/command/arguments/_1/newStringParameter"
                             }
                           }
                         ]
@@ -4631,15 +4705,15 @@
         "parameters": [
           {
             "value": [
-              -156.0,
-              -204.0
+              -164.0,
+              -209.0
             ],
             "controlAddress": "/viewUIPosition"
           },
           {
             "value": [
               245.0,
-              133.0
+              131.0
             ],
             "controlAddress": "/viewUISize"
           },
@@ -4708,8 +4782,6 @@
                     "commandPath": "Templates",
                     "commandType": "Id",
                     "command": {
-                      "arguments": {
-                      },
                       "argManager": {
                         "items": [
                           {
@@ -4778,8 +4850,6 @@
                     "commandPath": "Templates",
                     "commandType": "Name",
                     "command": {
-                      "arguments": {
-                      },
                       "argManager": {
                         "items": [
                           {
@@ -4870,8 +4940,6 @@
                     "commandPath": "Templates",
                     "commandType": "Firmware",
                     "command": {
-                      "arguments": {
-                      },
                       "argManager": {
                         "items": [
                           {
@@ -4892,7 +4960,7 @@
                             "niceName": "#1",
                             "type": "String",
                             "param": {
-                              "value": "SS-v3.0",
+                              "value": "SS-v3.2",
                               "controlMode": 2,
                               "reference": {
                                 "value": "/modules/serial4/values/firmware",
@@ -4920,7 +4988,7 @@
                   "controlAddress": "/viewUIPosition"
                 }
               ],
-              "niceName": "ip (from name)",
+              "niceName": "local ip (t by name)",
               "editorIsCollapsed": true,
               "type": "Action",
               "conditions": {
@@ -4968,8 +5036,6 @@
                           "controlAddress": "/address"
                         }
                       ],
-                      "arguments": {
-                      },
                       "argManager": {
                         "items": [
                           {
@@ -4983,15 +5049,20 @@
                                 "controlAddress": "/reference"
                               },
                               "hexMode": false,
-                              "controlAddress": "/states/serial4_OSCChorale/processors/ip_fromName_/consequencesTRUE/consequence/command/arguments/_2/newIntParameter"
+                              "controlAddress": "/states/serial4_OSCChorale/processors/localIp_tByName_/consequencesTRUE/consequence/command/arguments/_2/newIntParameter"
                             }
                           },
                           {
                             "niceName": "#1",
                             "type": "String",
                             "param": {
-                              "value": "127.0.0.1",
-                              "controlAddress": "/states/serial4_OSCChorale/processors/ip_fromName_/consequencesTRUE/consequence/command/arguments/_1/newStringParameter"
+                              "value": "192.168.0.100",
+                              "controlMode": 2,
+                              "reference": {
+                                "value": "/customVariables/ips/variables/localIP/localIP",
+                                "controlAddress": "/reference"
+                              },
+                              "controlAddress": "/states/serial4_OSCChorale/processors/localIp_tByName_/consequencesTRUE/consequence/command/arguments/_1/newStringParameter"
                             }
                           }
                         ]
@@ -5088,8 +5159,6 @@
                     "commandPath": "Templates",
                     "commandType": "Id",
                     "command": {
-                      "arguments": {
-                      },
                       "argManager": {
                         "items": [
                           {
@@ -5158,8 +5227,6 @@
                     "commandPath": "Templates",
                     "commandType": "Name",
                     "command": {
-                      "arguments": {
-                      },
                       "argManager": {
                         "items": [
                           {
@@ -5250,8 +5317,6 @@
                     "commandPath": "Templates",
                     "commandType": "Firmware",
                     "command": {
-                      "arguments": {
-                      },
                       "argManager": {
                         "items": [
                           {
@@ -5272,7 +5337,7 @@
                             "niceName": "#1",
                             "type": "String",
                             "param": {
-                              "value": "SS-v3.0",
+                              "value": "SS-v3.3",
                               "controlMode": 2,
                               "reference": {
                                 "value": "/modules/serialJack/values/firmware",
@@ -5300,7 +5365,7 @@
                   "controlAddress": "/viewUIPosition"
                 }
               ],
-              "niceName": "ip (from name)",
+              "niceName": "local ip (t by name)",
               "editorIsCollapsed": true,
               "type": "Action",
               "conditions": {
@@ -5348,8 +5413,6 @@
                           "controlAddress": "/address"
                         }
                       ],
-                      "arguments": {
-                      },
                       "argManager": {
                         "items": [
                           {
@@ -5363,15 +5426,20 @@
                                 "controlAddress": "/reference"
                               },
                               "hexMode": false,
-                              "controlAddress": "/states/jack_OSCChorale/processors/ip_fromName_/consequencesTRUE/consequence/command/arguments/_2/newIntParameter"
+                              "controlAddress": "/states/jack_OSCChorale/processors/localIp_tByName_/consequencesTRUE/consequence/command/arguments/_2/newIntParameter"
                             }
                           },
                           {
                             "niceName": "#1",
                             "type": "String",
                             "param": {
-                              "value": "127.0.0.1",
-                              "controlAddress": "/states/jack_OSCChorale/processors/ip_fromName_/consequencesTRUE/consequence/command/arguments/_1/newStringParameter"
+                              "value": "192.168.0.100",
+                              "controlMode": 2,
+                              "reference": {
+                                "value": "/customVariables/ips/variables/localIP/localIP",
+                                "controlAddress": "/reference"
+                              },
+                              "controlAddress": "/states/jack_OSCChorale/processors/localIp_tByName_/consequencesTRUE/consequence/command/arguments/_1/newStringParameter"
                             }
                           }
                         ]
@@ -5393,123 +5461,6 @@
       {
         "niceName": "Router",
         "type": "BaseItem",
-        "sourceModule": "joystick",
-        "sourceValues": {
-          "items": [
-            {
-              "niceName": "Axis 1",
-              "type": "BaseItem",
-              "customName": "Axis 1",
-              "routeParams": {
-              }
-            },
-            {
-              "niceName": "Axis 2",
-              "type": "BaseItem",
-              "customName": "Axis 2",
-              "routeParams": {
-              }
-            },
-            {
-              "niceName": "Axis 3",
-              "type": "BaseItem",
-              "customName": "Axis 3",
-              "routeParams": {
-              }
-            },
-            {
-              "niceName": "Axis 4",
-              "type": "BaseItem",
-              "customName": "Axis 4",
-              "routeParams": {
-              }
-            },
-            {
-              "niceName": "Button 1",
-              "type": "BaseItem",
-              "customName": "Button 1",
-              "routeParams": {
-              }
-            },
-            {
-              "niceName": "Button 2",
-              "type": "BaseItem",
-              "customName": "Button 2",
-              "routeParams": {
-              }
-            },
-            {
-              "niceName": "Button 3",
-              "type": "BaseItem",
-              "customName": "Button 3",
-              "routeParams": {
-              }
-            },
-            {
-              "niceName": "Button 4",
-              "type": "BaseItem",
-              "customName": "Button 4",
-              "routeParams": {
-              }
-            },
-            {
-              "niceName": "Button 5",
-              "type": "BaseItem",
-              "customName": "Button 5",
-              "routeParams": {
-              }
-            },
-            {
-              "niceName": "Button 6",
-              "type": "BaseItem",
-              "customName": "Button 6",
-              "routeParams": {
-              }
-            },
-            {
-              "niceName": "Button 7",
-              "type": "BaseItem",
-              "customName": "Button 7",
-              "routeParams": {
-              }
-            },
-            {
-              "niceName": "Button 8",
-              "type": "BaseItem",
-              "customName": "Button 8",
-              "routeParams": {
-              }
-            },
-            {
-              "niceName": "Button 9",
-              "type": "BaseItem",
-              "customName": "Button 9",
-              "routeParams": {
-              }
-            },
-            {
-              "niceName": "Button 10",
-              "type": "BaseItem",
-              "customName": "Button 10",
-              "routeParams": {
-              }
-            },
-            {
-              "niceName": "Button 11",
-              "type": "BaseItem",
-              "customName": "Button 11",
-              "routeParams": {
-              }
-            },
-            {
-              "niceName": "Button 12",
-              "type": "BaseItem",
-              "customName": "Button 12",
-              "routeParams": {
-              }
-            }
-          ]
-        },
         "destModule": "oscJoystick"
       }
     ]

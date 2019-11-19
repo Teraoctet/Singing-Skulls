@@ -1,4 +1,6 @@
-const String FIRMWARE_VERSION = "SS-v3.2";
+#include <ESP8266WiFi.h>
+
+const String FIRMWARE_VERSION = "SS-v3.3";
 
 #define MULTI_SERVO // COMMENT FOR CHOIR SKULLS
 
@@ -7,7 +9,7 @@ const String FIRMWARE_VERSION = "SS-v3.2";
 // ID and NAME //
 /////////////////
 #ifndef MULTI_SERVO
-const int SKULL_ID = 1; // SET SKULL ID HERE: 1 to 5
+const int SKULL_ID = 2; // SET SKULL ID HERE: 1 to 5
 #else
 const int SKULL_ID = 0; // do not change
 #endif
@@ -40,6 +42,10 @@ unsigned long lastPingTime = 0;
 
 void setup()
 {
+  // disable WIFI on ESP8266
+  WiFi.mode( WIFI_OFF );
+  WiFi.forceSleepBegin();
+
   // set up servo
 #ifndef MULTI_SERVO
   pinMode(SERVO_PIN, OUTPUT);
@@ -48,6 +54,14 @@ void setup()
 #else
   pwm.begin();
   pwm.setPWMFreq(60);  // Analog servos run at ~60 Hz updates
+
+  // center motors
+  pwm.setPWM(0, 0, map(129, 0, 180, SERVOMIN, SERVOMAX));
+  pwm.setPWM(1, 0, map(63, 0, 180, SERVOMIN, SERVOMAX));
+  pwm.setPWM(2, 0, map(96, 0, 180, SERVOMIN, SERVOMAX));
+  pwm.setPWM(3, 0, map(63, 0, 180, SERVOMIN, SERVOMAX));
+  pwm.setPWM(4, 0, map(55, 0, 180, SERVOMIN, SERVOMAX));
+  pwm.setPWM(5, 0, map(79, 0, 180, SERVOMIN, SERVOMAX));
 #endif
 
   Serial.begin(115200);
