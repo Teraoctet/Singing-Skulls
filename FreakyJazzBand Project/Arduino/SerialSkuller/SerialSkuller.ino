@@ -1,19 +1,19 @@
 #include <ESP8266WiFi.h>
 
-const String FIRMWARE_VERSION = "SS-v3.3";
+const String FIRMWARE_VERSION = "SS-v3.4";
 
-#define MULTI_SERVO // COMMENT FOR CHOIR SKULLS
+//#define MULTI_SERVO // COMMENT FOR CHOIR SKULLS
 
 
 /////////////////
 // ID and NAME //
 /////////////////
 #ifndef MULTI_SERVO
-const int SKULL_ID = 2; // SET SKULL ID HERE: 1 to 5
+const int SKULL_ID = 3; // SET SKULL ID HERE: 1 to 5
 #else
 const int SKULL_ID = 0; // do not change
 #endif
-String SKULL_NAMES[6] = { "Jack", "Pat", "Ninon", "Sissi", "Jerry", "Hubert"};
+String SKULL_NAMES[6] = { "Jack", "Pat", "Jerry", "Ninon", "Sissi", "Hubert"};
 const String SKULL_NAME = SKULL_NAMES[SKULL_ID];
 
 ///////////
