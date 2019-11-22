@@ -1,9 +1,8 @@
 #include <ESP8266WiFi.h>
 
-const String FIRMWARE_VERSION = "SS-v3.5";
+const String FIRMWARE_VERSION = "SS-v3.6";
 
 //#define MULTI_SERVO // COMMENTER POUR LA CHORALE
-
 
 /////////////////
 // ID and NAME //
@@ -87,6 +86,8 @@ void loop()
   while (Serial.available()) {
     byte inputSize = Serial.readBytesUntil('\n', incBuffer, INPUT_SIZE);
 
+        Serial.println(incBuffer);
+        
     // remove CR
     if (incBuffer[inputSize-1] == '\r')
       inputSize--;
@@ -107,11 +108,19 @@ void loop()
 
       int servoValue = constrain(atoi(separator), 0, 180);
       Serial.println("servoValue:" + String(servoValue));
+      if (servoValue == 180)
+      {
+        Serial.println("error:180");
+
+      }else
+      {
 #ifndef MULTI_SERVO
       servo.write(servoValue);
 #else
+      //TODO : implement end values for security
       pwm.setPWM(servoIndex, 0, map(servoValue, 0, 180, SERVOMIN, SERVOMAX));
 #endif
+      }
     }
   }
 }
