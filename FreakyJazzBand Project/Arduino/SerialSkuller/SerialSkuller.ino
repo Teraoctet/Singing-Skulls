@@ -2,18 +2,18 @@
 
 const String FIRMWARE_VERSION = "SS-v3.5";
 
-#define MULTI_SERVO // COMMENT FOR CHOIR SKULLS
+//#define MULTI_SERVO // COMMENTER POUR LA CHORALE
 
 
 /////////////////
 // ID and NAME //
 /////////////////
 #ifndef MULTI_SERVO
-const int SKULL_ID = 3; // SET SKULL ID HERE: 1 to 5
+const int SKULL_ID = 3; // CHANGER LE NUMERO DU CRANE ICI : 1 à 4
 #else
-const int SKULL_ID = 0; // do not change
+const int SKULL_ID = 0; // ne pas toucher
 #endif
-String SKULL_NAMES[6] = { "Jack", "Pat", "Jerry", "Ninon", "Sissi", "Hubert"};
+String SKULL_NAMES[5] = { "Jack", "Pat", "Jerry", "Ninon", "Sissi"};
 const String SKULL_NAME = SKULL_NAMES[SKULL_ID];
 
 ///////////
@@ -36,7 +36,7 @@ Adafruit_PWMServoDriver pwm = Adafruit_PWMServoDriver();
 ///////////
 #define INPUT_SIZE 50
 char incBuffer[INPUT_SIZE];
-int pingTimeInMs = 1000;
+unsigned long pingTimeInMs = 1000;
 unsigned long lastPingTime = 0;
 
 
@@ -77,7 +77,7 @@ void handshake()
 
 void loop()
 {
-  if ((unsigned long)(millis() - lastPingTime) > pingTimeInMs)
+  if (millis() - lastPingTime > pingTimeInMs)
   {
     //Serial.println("ping");
     Serial.println("id:" + String(SKULL_ID));
