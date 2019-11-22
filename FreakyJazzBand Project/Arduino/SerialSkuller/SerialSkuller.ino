@@ -54,12 +54,12 @@ void setup()
 #else
   pwm.begin();
   pwm.setPWMFreq(60);  // Analog servos run at ~60 Hz updates
-
+  
   // center motors
-  pwm.setPWM(0, 0, map(150, 0, 180, SERVOMIN, SERVOMAX)); // aam (max 180)
-  pwm.setPWM(1, 0, map(50, 0, 180, SERVOMIN, SERVOMAX)); //yes (min 0)
+  pwm.setPWM(0, 0, map(150, 0, 180, SERVOMIN, SERVOMAX)); // aam (max interne 180, max externe 170)
+  pwm.setPWM(1, 0, map(50, 0, 180, SERVOMIN, SERVOMAX)); //yes (min interne 0, min externe 15)
   pwm.setPWM(2, 0, map(90, 0, 180, SERVOMIN, SERVOMAX)); // no
-  pwm.setPWM(3, 0, map(45, 0, 180, SERVOMIN, SERVOMAX)); // jaw (min 45)
+  pwm.setPWM(3, 0, map(45, 0, 180, SERVOMIN, SERVOMAX)); // jaw (min 45, max 90)
   pwm.setPWM(4, 0, map(90, 0, 180, SERVOMIN, SERVOMAX)); // eyes Y
   pwm.setPWM(5, 0, map(93, 0, 180, SERVOMIN, SERVOMAX)); // eyes X
 #endif
