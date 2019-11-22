@@ -1,8 +1,8 @@
 #include <ESP8266WiFi.h>
 
-const String FIRMWARE_VERSION = "SS-v3.4";
+const String FIRMWARE_VERSION = "SS-v3.5";
 
-//#define MULTI_SERVO // COMMENT FOR CHOIR SKULLS
+#define MULTI_SERVO // COMMENT FOR CHOIR SKULLS
 
 
 /////////////////
@@ -56,12 +56,12 @@ void setup()
   pwm.setPWMFreq(60);  // Analog servos run at ~60 Hz updates
 
   // center motors
-  pwm.setPWM(0, 0, map(129, 0, 180, SERVOMIN, SERVOMAX));
-  pwm.setPWM(1, 0, map(63, 0, 180, SERVOMIN, SERVOMAX));
-  pwm.setPWM(2, 0, map(96, 0, 180, SERVOMIN, SERVOMAX));
-  pwm.setPWM(3, 0, map(63, 0, 180, SERVOMIN, SERVOMAX));
-  pwm.setPWM(4, 0, map(55, 0, 180, SERVOMIN, SERVOMAX));
-  pwm.setPWM(5, 0, map(79, 0, 180, SERVOMIN, SERVOMAX));
+  pwm.setPWM(0, 0, map(150, 0, 180, SERVOMIN, SERVOMAX)); // aam (max 180)
+  pwm.setPWM(1, 0, map(50, 0, 180, SERVOMIN, SERVOMAX)); //yes (min 0)
+  pwm.setPWM(2, 0, map(90, 0, 180, SERVOMIN, SERVOMAX)); // no
+  pwm.setPWM(3, 0, map(45, 0, 180, SERVOMIN, SERVOMAX)); // jaw (min 45)
+  pwm.setPWM(4, 0, map(90, 0, 180, SERVOMIN, SERVOMAX)); // eyes Y
+  pwm.setPWM(5, 0, map(93, 0, 180, SERVOMIN, SERVOMAX)); // eyes X
 #endif
 
   Serial.begin(115200);
