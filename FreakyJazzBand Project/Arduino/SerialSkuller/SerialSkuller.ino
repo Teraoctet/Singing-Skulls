@@ -8,12 +8,29 @@ const String FIRMWARE_VERSION = "SS-v3.6";
 // ID and NAME //
 /////////////////
 #ifndef MULTI_SERVO
-const int SKULL_ID = 3; // CHANGER LE NUMERO DU CRANE ICI : 1 à 4
+const byte SKULL_ID = 3; // CHANGER LE NUMERO DU CRANE ICI : 1 à 4
 #else
-const int SKULL_ID = 0; // ne pas toucher
+const byte SKULL_ID = 0; // ne pas toucher
 #endif
 String SKULL_NAMES[5] = { "Jack", "Pat", "Jerry", "Ninon", "Sissi"};
 const String SKULL_NAME = SKULL_NAMES[SKULL_ID];
+
+#ifdef MULTI_SERVO                                                      
+struct MOTOR {
+  uint8_t minVal;
+  uint8_t midVal;
+  uint8_t maxVal;
+};
+
+MOTOR Motors[3] = {
+  {125 , 150, 170}, // AAM = 0
+  {25 , 49, 75},    // YES = 1
+  {0 , 90, 180},    // NO = 2
+  {50 , 50, 90},    // JAW = 3
+  {55 , 72, 90},    // EYES_Y = 4
+  {69 , 78, 96},    // EYES_X = 5
+};
+#endif
 
 ///////////
 // Servo //
@@ -33,7 +50,7 @@ Adafruit_PWMServoDriver pwm = Adafruit_PWMServoDriver();
 ///////////
 // Serial /
 ///////////
-#define INPUT_SIZE 50
+#define INPUT_SIZE 3
 char incBuffer[INPUT_SIZE];
 unsigned long pingTimeInMs = 1000;
 unsigned long lastPingTime = 0;
@@ -53,14 +70,14 @@ void setup()
 #else
   pwm.begin();
   pwm.setPWMFreq(60);  // Analog servos run at ~60 Hz updates
-  
   // center motors
-  pwm.setPWM(0, 0, map(150, 0, 180, SERVOMIN, SERVOMAX)); // aam (max interne 180, max externe 170)
+  pwm.setPWM(Motors[AAM].index, 0, map(Motors[AAM].midVal, 0, 180, SERVOMIN, SERVOMAX)); // aam (max interne 180, max externe 170)
   pwm.setPWM(1, 0, map(50, 0, 180, SERVOMIN, SERVOMAX)); //yes (min interne 0, min externe 15)
   pwm.setPWM(2, 0, map(90, 0, 180, SERVOMIN, SERVOMAX)); // no
   pwm.setPWM(3, 0, map(45, 0, 180, SERVOMIN, SERVOMAX)); // jaw (min 45, max 90)
   pwm.setPWM(4, 0, map(90, 0, 180, SERVOMIN, SERVOMAX)); // eyes Y
   pwm.setPWM(5, 0, map(93, 0, 180, SERVOMIN, SERVOMAX)); // eyes X
+
 #endif
 
   Serial.begin(115200);
@@ -78,49 +95,52 @@ void loop()
 {
   if (millis() - lastPingTime > pingTimeInMs)
   {
-    //Serial.println("ping");
     Serial.println("id:" + String(SKULL_ID));
     lastPingTime = millis();
   }
 
   while (Serial.available()) {
-    byte inputSize = Serial.readBytesUntil('\n', incBuffer, INPUT_SIZE);
+    byte inputSize = Serial.readBytesUntil(char(255), incBuffer, INPUT_SIZE);
 
-        Serial.println(incBuffer);
-        
-    // remove CR
-    if (incBuffer[inputSize-1] == '\r')
-      inputSize--;
+    Serial.println("s:" + String(inputSize));
+    Serial.println("b:" + String(incBuffer));
 
-    // Answer to handshake
-    if (inputSize == 9)
-      if(strcmp(incBuffer, "handshake"))
-        handshake();
-
-    // Otherwise look for separator
-    char* separator = strchr(&incBuffer[0], ':');
-    if (separator)
+    if (incBuffer[0] == 'h') // 104 - x68
     {
-      int servoIndex = atoi(incBuffer);
+      handshake();
+      return;
+    }
 
-      *separator = 0;
-      ++separator;
+    if (inputSize < 2)
+      return;
 
-      int servoValue = constrain(atoi(separator), 0, 180);
-      Serial.println("servoValue:" + String(servoValue));
-      if (servoValue == 180)
-      {
-        Serial.println("error:180");
+    int servoValue = int(incBuffer[1]);
 
-      }else
-      {
-#ifndef MULTI_SERVO
-      servo.write(servoValue);
-#else
-      //TODO : implement end values for security
+    if (incBuffer[0] == 's') // 115 - x73
+    {
+      if (servoValue < 45 || servoValue > 90)
+        Serial.print("value error:" + String(servoValue)); // FIXME: pourquoi ca fait lagger chataigne ?
+      else
+        servo.write(servoValue);
+      return;
+    }
+
+#ifdef MULTI_SERVO
+    int servoIndex = int(incBuffer[0]);
+    if (servoIndex < 0 || servoIndex > Motors.length())
+    {
+      Serial.print("index error:" + String(servoIndex));
+      return;
+    }
+    Motor m = Motors[servoIndex];
+
+    if (servoValue < m.minVal || servoValue > m.maxVal)
+    {
+      Serial.print("value error:" + String(servoValue));
+      Serial.print("on index:" + String(servoIndex));
+    }
+    else
       pwm.setPWM(servoIndex, 0, map(servoValue, 0, 180, SERVOMIN, SERVOMAX));
 #endif
-      }
-    }
   }
 }
